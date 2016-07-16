@@ -45,6 +45,8 @@ If all went well, you will see the message:
 
 "SUCCESS: EXTRACTED FILE IS IDENTICAL TO ORIGINALLY STEGGED FILE"
 
+steggin takes a SHA 256 hash of the secret file before steggin and compares it to the SHA 256 hash of the extracted file. If the extracted file has been tampered with, steggin will still extract the file, but it will warn you of the tampering.
+
 This will extract the hidden file into the current working directory and name the file "extractedFile". The file won't have an extension.
 
 You'll want to rename the extracted file immediately because if you try to extract from another stegged file, it will overwrite a previously extractedFile
