@@ -27,12 +27,12 @@ function concatenate {
 }
 
 function getShaHashes {
-	INNOCENT_SHA="$(shasum -a 256 $1 | awk '{print $1}')"
+	CAR_SHA="$(shasum -a 256 $1 | awk '{print $1}')"
 	SECRET_SHA="$(shasum -a 256 $2 | awk '{print $1}')"
 }
 
 function makeMetaDataText {
-	echo "CARSHA: $INNOCENT_SHA" >> metaData.txt
+	echo "CARSHA: $CAR_SHA" >> metaData.txt
 	echo "SECSHA: $SECRET_SHA" >> metaData.txt
 	echo "STARTBYTE: $START_BYTE" >> metaData.txt
 	echo "ENDBYTE: $END_BYTE" >> metaData.txt
@@ -87,8 +87,8 @@ then
 
 	# Success output
 
-	echo Innocent File Size: $LAST_BYTE bytes
-	echo Innocent File SHA256: $INNOCENT_SHA
+	echo Carrier File Size: $LAST_BYTE bytes
+	echo Carrier File SHA256: $CAR_SHA
 	echo Secret File Start Byte: $START_BYTE
 	echo Secret File SHA256: $SECRET_SHA
 	echo Secret File End Byte: $END_BYTE
