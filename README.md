@@ -28,7 +28,7 @@ You just stegged bro. This command will create a file named "justStegginBro-[NAM
 
 It is recommended (but not required) that you use an original image, movie or audio file as a carrier file. Original meaning one you created yourself.
 
-Using an original file will make it much harder to detect that the file contains a hidden message.
+Using an original file will make it much harder for unauthorized detection of the hidden message.
 
 It is also recommended that you use GPG encryption on your secret file prior to steggin. Once the .gpg file is extracted, you can use GPG to decrypt it.
 
