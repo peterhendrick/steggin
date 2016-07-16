@@ -12,17 +12,17 @@ You need to give yourself permission to execute the steggin.sh file. Type "chmod
 
 Currently, you must use files in the steggin directory. So copy your carrier and secerte files to the steggin directory:
 
-cd <PATH TO steggin DIRECTORY>
+cd [PATH TO steggin DIRECTORY]
 
-cp <PATH TO CARRIER FILE> ./
+cp [PATH TO CARRIER FILE] ./
 
-cp <PATH TO SECRET FILE> ./
+cp [PATH TO SECRET FILE] ./
 
 Now you can start steggin' bro.
 
 To hide a file in a carrier file, type:
 
-./steggin.sh <CARRIER FILE> <SECRET FILE>
+./steggin.sh [CARRIER FILE] [SECRET FILE]
 
 You just stegged bro. This command will create a file named "justStegginBro-[NAME OF CARRIER FILE]" and will contain your hidden file.
 
