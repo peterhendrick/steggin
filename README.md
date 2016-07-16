@@ -41,13 +41,17 @@ To extract a file that has been previously stegged, type:
 
 ./steggin.sh [PATH TO STEGGED FILE]
 
-This will extract the hidden file into the current working directory and name the file "extractedFile".
-
-If the file was encrypted with GPG prior to steggin, then you will need to use GPG on extractedFile to decrypt it, type:
-
-gpg extractedFile
+This will extract the hidden file into the current working directory and name the file "extractedFile". The file won't have an extension.
 
 Then enter your password for your GPG secret key to decrypt the message.
 
 You'll want to rename the extracted file immediately because if you try to extract from another stegged file, it will overwrite a previously extractedFile
+
+To rename the file, type:
+
+mv extractedFile [YOUR FILE NAME]
+
+If the file was encrypted with GPG prior to steggin, then you will need to use GPG on extractedFile to decrypt it, type:
+
+gpg [YOUR EXTRACTED FILE]
 
