@@ -10,7 +10,7 @@ To download, type the command, "git clone https://github.com/peterhendrick/stegg
 
 You need to give yourself permission to execute the steggin.sh file. Type "chmod u+x ./steggin.sh"
 
-Currently, you must use files in the steggin directory. So copy your carrier and secerte files to the steggin directory:
+Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory:
 
 cd [PATH TO steggin DIRECTORY]
 
