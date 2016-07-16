@@ -41,6 +41,10 @@ To extract a file that has been previously stegged, type:
 
 ./steggin.sh [PATH TO STEGGED FILE]
 
+If all went well, you will see the message:
+
+"SUCCESS: EXTRACTED FILE IS IDENTICAL TO ORIGINALLY STEGGED FILE"
+
 This will extract the hidden file into the current working directory and name the file "extractedFile". The file won't have an extension.
 
 You'll want to rename the extracted file immediately because if you try to extract from another stegged file, it will overwrite a previously extractedFile
