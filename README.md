@@ -30,7 +30,7 @@ It is recommended (but not required) that you use an original image, movie or au
 
 Using an original file will make it much harder to detect that the file contains a hidden message.
 
-It is also recommended that you use gpg encryption on your secret file prior to steggin. Once the .gpg file is extracted, you can use gpg to decrypt it.
+It is also recommended that you use GPG encryption on your secret file prior to steggin. Once the .gpg file is extracted, you can use GPG to decrypt it.
 
 
 Using gpg to encrypt the secret file prior to steggin will ensure that even if the stegged message is discovered,
@@ -42,6 +42,12 @@ To extract a file that has been previously stegged, type:
 ./steggin.sh [PATH TO STEGGED FILE]
 
 This will extract the hidden file into the current working directory and name the file "extractedFile".
+
+If the file was encrypted with GPG prior to steggin, then you will need to use GPG on extractedFile to decrypt it, type:
+
+gpg extractedFile
+
+Then enter your password for your GPG secret key to decrypt the message.
 
 You'll want to rename the extracted file immediately because if you try to extract from another stegged file, it will overwrite a previously extractedFile
 
