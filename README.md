@@ -44,8 +44,6 @@ Verifying the gpg signature along with verifying that the sha256 hash matches th
 you can have absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to
 file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption.
 
-
-
 Now that you've verified the authenticity of the steggin file, you need to give yourself permission to execute the steggin.sh file. Type the command:
 
 chmod u+x ./steggin.sh"
@@ -59,15 +57,16 @@ cp [PATH TO SECRET FILE] ./
 
 Now you can start steggin' bro.
 
+Attention: Do not use a text based file for the carrier file. This could result in the secret message
+becoming visible.
+
 To hide a file in a carrier file, type:
 
 ./steggin.sh [CARRIER FILE] [SECRET FILE]
 
 You just stegged bro. This command will create a file named "justStegginBro-[NAME OF CARRIER FILE]" and will contain your hidden file.
 
-It is recommended (but not required) that you use an original image, movie or audio file as a carrier file. Original meaning one you created yourself.
-
-Using an original file will make it much harder for unauthorized detection of the hidden message.
+It is recommended (but not required) that you use an original photo, movie or audio file as a carrier file. Original meaning one you created yourself. Using an original file will make it much harder for unauthorized detection of the hidden message.
 
 It is also recommended that you use GPG encryption on your secret file prior to steggin. Once the .gpg file is extracted, you can use GPG to decrypt it.
 
