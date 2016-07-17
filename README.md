@@ -39,8 +39,9 @@ The following should be part of the output:
 
 gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
 
+If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote.
 
-If you see the "Good signature", you can be as certain as possible that the SHASUMS file is the file I wrote.
+
 
 You need to give yourself permission to execute the steggin.sh file. Type the command:
 
