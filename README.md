@@ -10,7 +10,7 @@ To download, type the command:
 git clone https://github.com/peterhendrick/steggin && cd steggin
 
 You are going to want to verify the file you download is the legitimate. To do
-this, I've included a SHASUMS file.
+this, I've included a SHASUM file.
 
 In bash you can type:
 
