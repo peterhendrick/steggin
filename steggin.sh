@@ -21,6 +21,15 @@ STEG_FILE=justStegginBro-$1
 
 # Function Definitions
 
+function checkForSteggin {
+	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
+	if [ "$CHECK" = "SECSHA:" ];
+	then
+		echo "Error: Carrier file has been previously stegged. Exiting without steggin"
+		exit 1
+	fi
+}
+
 function concatenate {
 	echo concatenating $1 and $2
 	cat $1 $2 > $STEG_FILE
@@ -46,8 +55,6 @@ function readMetaDataText {
 	STARTBYTE="$(tail -c 500 $1 | grep -a 'STARTBYTE' | awk '{print $2}')"
 	ENDBYTE="$(tail -c 500 $1 | grep -a 'ENDBYTE' | awk '{print $2}')"
 	METABYTE="$(tail -c 500 $1 | grep -a 'METABYTE' | awk '{print $2}')"
-
-	rm metadata.txt
 }
 
 function extractSecretFile {
@@ -72,6 +79,7 @@ function extractSecretFile {
 
 if [ $# = 2 ]
 then
+	checkForSteggin $1
 	concatenate $1 $2
 	getShaHashes $1 $2
 
