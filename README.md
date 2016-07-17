@@ -6,7 +6,41 @@ Author: Peter Hendrick
 
 To use steggin, you need the Bourne Again Shell (bash).
 
-To download, type the command, "git clone https://github.com/peterhendrick/steggin && cd steggin"
+To download, type the command:
+git clone https://github.com/peterhendrick/steggin && cd steggin
+
+You are going to want to verify the file you download is the legitimate. To do
+this, I've included a SHASUMS file.
+
+In bash you can type:
+
+shasum steggin.sh && cat SHASUMS | grep 'sha1sum' | awk '{print $2}'
+
+If the hash on the second line matches the hash of the steggin.sh file, then you
+can be confident that the steggin.sh file you've downloaded matches the steggin.sh
+file that I wrote.
+
+
+Still, this is not enough to ensure that the SHASUMS file you have is legitimate.
+An attacker could replace the steggin.sh file, and the SHASUMS file to match
+their malicious steggin.sh file.
+
+For this, I've included a signature file, and I've signed it with my gpg address.
+
+You'll need to import my public GPG key. Type the command:
+
+gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
+
+Then to verify the SHASUMS folder has not been tampered with, type:
+
+gpg --verify SHASUMS.sig SHASUMS
+
+The following should be part of the output:
+
+gpg: Signature made Sat Jul 16 21:57:17 2016 using RSA key ID EC3ED53D
+gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
+
+If you see the "Good signature", you can be as certain as possible that the SHASUMS file is the file I wrote.
 
 You need to give yourself permission to execute the steggin.sh file. Type "chmod u+x ./steggin.sh"
 
@@ -60,4 +94,3 @@ If the file was encrypted with GPG prior to steggin, then you will need to use G
 gpg [YOUR EXTRACTED FILE]
 
 Then enter your password for your GPG secret key to decrypt the message.
-

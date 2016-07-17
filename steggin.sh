@@ -1,5 +1,5 @@
 #!/bin/bash
-# ---- Just steggin' bro. ----
+# ----- Just steggin' bro. -----
 # version 0.0.2
 # system_page - A script to accept two files, concatenate them, or deconcatonate a concatenated file.
 
