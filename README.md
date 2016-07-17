@@ -37,9 +37,6 @@ gpg --verify SHASUMS.sig SHASUMS
 
 The following should be part of the output:
 
-
-gpg: Signature made Sat Jul 16 21:57:17 2016 using RSA key ID EC3ED53D
-
 gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
 
 
