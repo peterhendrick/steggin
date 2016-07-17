@@ -31,18 +31,24 @@ You'll need to import my public GPG key. Type the command:
 
 gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
 
-Then to verify the SHASUMS folder has not been tampered with, type:
+Then to verify the SHASUMS file has not been tampered with, type:
 
 gpg --verify SHASUMS.sig SHASUMS
 
 The following should be part of the output:
 
+
 gpg: Signature made Sat Jul 16 21:57:17 2016 using RSA key ID EC3ED53D
+
 gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
+
 
 If you see the "Good signature", you can be as certain as possible that the SHASUMS file is the file I wrote.
 
-You need to give yourself permission to execute the steggin.sh file. Type "chmod u+x ./steggin.sh"
+You need to give yourself permission to execute the steggin.sh file. Type the command:
+
+chmod u+x ./steggin.sh"
+
 
 Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory:
 
