@@ -14,7 +14,7 @@ The Commands used in this README file assume your current working directory is t
 You are going to want to verify the file you download is legitimate. To do
 this, I've included a SHASUM file.
 
-In bash you can type:
+Type the command:
 
 shasum -a 256 steggin.sh && cat SHASUM
 
