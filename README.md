@@ -21,8 +21,8 @@ downloaded matches the steggin.sh file that I wrote. If they do not match, stop,
 your steggin folder, and redownload the file. If they don't match, then the steggin.sh file
 is not the file I wrote.
 
-Still, this is not enough to ensure that the SHASUMS file you have is legitimate.
-An attacker could replace the steggin.sh file, and the SHASUMS file to match
+Still, this is not enough to ensure that the SHASUM file you have is legitimate.
+An attacker could replace the steggin.sh file, and the SHASUM file to match
 their malicious steggin.sh file.
 
 For this, I've included a signature file, and I've signed it with my gpg address.
@@ -33,7 +33,7 @@ gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
 
 Then to verify the SHASUMS file has not been tampered with, type:
 
-gpg --verify SHASUMS.sig SHASUMS
+gpg --verify SHASUM.sig SHASUM
 
 The following should be part of the output:
 
