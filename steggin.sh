@@ -41,7 +41,7 @@ function getShaHashes {
 }
 
 function makeMetaDataText {
-	echo "CARSHA: $CAR_SHA" >> metaData.txt
+	echo "CARSHA: $CAR_SHA" > metaData.txt
 	echo "SECSHA: $SECRET_SHA" >> metaData.txt
 	echo "STARTBYTE: $START_BYTE" >> metaData.txt
 	echo "ENDBYTE: $END_BYTE" >> metaData.txt
