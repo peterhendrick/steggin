@@ -31,7 +31,7 @@ You'll need to import my public GPG key. Type the command:
 
 gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
 
-Then to verify the SHASUMS file has not been tampered with, type:
+Then to verify the SHASUM file has not been tampered with, type:
 
 gpg --verify SHASUM.sig SHASUM
 
