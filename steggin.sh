@@ -23,7 +23,7 @@ STEG_FILE=justStegginBro-$1
 
 function checkForSteggin {
 	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
-	if [ $CHECK = "SECSHA:" ];
+	if [ "$CHECK" = "SECSHA:" ];
 	then
 		echo "Error: Carrier file has been previously stegged. Exiting without steggin"
 		exit 1
@@ -64,7 +64,7 @@ function extractSecretFile {
 	EXTRACTEDSHA="$(shasum -a 256 ./extractedFile | awk '{print $1}')"
 	echo ExtractedSha: $EXTRACTEDSHA
 	echo Original Sha: $SECSHA
-	if [ $EXTRACTEDSHA = $SECSHA ];
+	if [ "$EXTRACTEDSHA" = "$SECSHA" ];
 	then
 		echo "SUCCESS: EXTRACTED FILE IS IDENTICAL TO ORIGINALLY STEGGED FILE"
 		echo "File saved in ./extractedFile"
