@@ -14,7 +14,7 @@ this, I've included a SHASUMS file.
 
 In bash you can type:
 
-shasum steggin.sh && cat SHASUMS | grep 'sha1sum' | awk '{print $2}'
+shasum -a 256 steggin.sh && cat SHASUMS | grep 'sha256sum' | awk '{print $2}'
 
 If the hash on the second line matches the hash of the steggin.sh file, then you
 can be confident that the steggin.sh file you've downloaded matches the steggin.sh
