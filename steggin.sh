@@ -15,7 +15,7 @@ function declareInitVars {
 	STEG_FILE=justStegginBro-$1
 }
 
-function checkForSteggin {
+function preventMultiSteggin {
 	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
 	if [ "$CHECK" = "SECSHA:" ]; then
 		echo "Error: Carrier file has been previously stegged. Exiting without steggin"
@@ -60,6 +60,11 @@ function cleanup {
 }
 
 function readMetaDataText {
+	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
+	if [ "$CHECK" != "SECSHA:" ]; then
+		echo "Error: File has not been previously stegged."
+		exit 1
+	fi
 	SECSHA="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $2}')"
 	CARSHA="$(tail -c 500 $1 | grep -a 'CARSHA' | awk '{print $2}')"
 	STARTBYTE="$(tail -c 500 $1 | grep -a 'STARTBYTE' | awk '{print $2}')"
@@ -82,7 +87,7 @@ function extractSecretFile {
 # Main Code
 if [ $# = 2 ]; then
 	declareInitVars $1
-	checkForSteggin $1
+	preventMultiSteggin $1
 	concatenate $1 $2
 	declareStegVars
 	getShaHashes $1 $2
