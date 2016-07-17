@@ -16,7 +16,7 @@ In bash you can type:
 
 shasum -a 256 steggin.sh && cat SHASUM
 
-If both lines match exactly, then you can be confident that the steggin.sh file you've
+If both lines of the output match exactly, then you can be confident that the steggin.sh file you've
 downloaded matches the steggin.sh file that I wrote. If they do not match, stop, delete
 your steggin folder, and redownload the file. If they don't match, then the steggin.sh file
 is not the file I wrote.
