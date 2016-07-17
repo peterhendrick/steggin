@@ -77,7 +77,7 @@ function extractSecretFile {
 
 # Main Code
 
-if [ $# = 2 ]
+if [ $# = 2 ];
 then
 	checkForSteggin $1
 	concatenate $1 $2
@@ -115,7 +115,7 @@ fi
 
 # Split a file that hass been previously stegged.
 
-if [ $# = 1 ]
+if [ $# = 1 ];
 then
 	readMetaDataText $1
 	extractSecretFile $1
