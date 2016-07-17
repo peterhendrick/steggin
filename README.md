@@ -25,7 +25,7 @@ Delete the project, and redownload.
 If they do match, this is not enough to be certain that the SHASUM and steggin.sh file you have is legitimate.
 An attacker could replace the steggin.sh file and the SHASUM file to match their malicious steggin.sh file.
 
-For this, I've included a signature file, and I've signed it with my gpg private key.
+To defend against this type of attack, I've included a signature file, and I've signed it with my gpg private key.
 
 You'll need to import my public GPG key. Type the command:
 
