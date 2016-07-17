@@ -43,7 +43,7 @@ If you see the "Good signature", you can be as certain as possible that the SHAS
 
 
 
-You need to give yourself permission to execute the steggin.sh file. Type the command:
+Now that you've verified the authenticity of the steggin file, you need to give yourself permission to execute the steggin.sh file. Type the command:
 
 chmod u+x ./steggin.sh"
 
