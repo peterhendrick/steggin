@@ -9,7 +9,9 @@ To use steggin, you need the Bourne Again Shell (bash).
 To download, type the command:
 git clone https://github.com/peterhendrick/steggin && cd steggin
 
-You are going to want to verify the file you download is the legitimate. To do
+The Commands used in this README file assume your current working directory is the steggin folder.
+
+You are going to want to verify the file you download is legitimate. To do
 this, I've included a SHASUM file.
 
 In bash you can type:
@@ -17,13 +19,11 @@ In bash you can type:
 shasum -a 256 steggin.sh && cat SHASUM
 
 If both lines of the output match exactly, then you can be confident that the steggin.sh file you've
-downloaded matches the steggin.sh file that I wrote. If they do not match, stop, delete
-your steggin folder, and redownload the file. If they don't match, then the steggin.sh file
-is not the file I wrote.
+downloaded matches the steggin.sh file that I wrote. If they do not match, you may have a corrupt download.
+Delete the project, and redownload.
 
-Still, this is not enough to ensure that the SHASUM file you have is legitimate.
-An attacker could replace the steggin.sh file, and the SHASUM file to match
-their malicious steggin.sh file.
+If they do match, this is not enough to be certain that the SHASUM and steggin.sh file you have is legitimate.
+An attacker could replace the steggin.sh file and the SHASUM file to match their malicious steggin.sh file.
 
 For this, I've included a signature file, and I've signed it with my gpg private key.
 
@@ -52,8 +52,6 @@ chmod u+x ./steggin.sh"
 
 
 Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory:
-
-cd [PATH TO steggin DIRECTORY]
 
 cp [PATH TO CARRIER FILE] ./
 
