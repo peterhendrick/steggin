@@ -14,12 +14,12 @@ this, I've included a SHASUMS file.
 
 In bash you can type:
 
-shasum -a 256 steggin.sh && cat SHASUMS | grep 'sha256sum' | awk '{print $2}'
+shasum -a 256 steggin.sh && cat SHASUM
 
-If the hash on the second line matches the hash of the steggin.sh file, then you
-can be confident that the steggin.sh file you've downloaded matches the steggin.sh
-file that I wrote.
-
+If both lines match exactly, then you can be confident that the steggin.sh file you've
+downloaded matches the steggin.sh file that I wrote. If they do not match, stop, delete
+your steggin folder, and redownload the file. If they don't match, then the steggin.sh file
+is not the file I wrote.
 
 Still, this is not enough to ensure that the SHASUMS file you have is legitimate.
 An attacker could replace the steggin.sh file, and the SHASUMS file to match
