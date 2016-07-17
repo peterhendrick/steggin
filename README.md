@@ -25,7 +25,7 @@ Still, this is not enough to ensure that the SHASUM file you have is legitimate.
 An attacker could replace the steggin.sh file, and the SHASUM file to match
 their malicious steggin.sh file.
 
-For this, I've included a signature file, and I've signed it with my gpg address.
+For this, I've included a signature file, and I've signed it with my gpg private key.
 
 You'll need to import my public GPG key. Type the command:
 
@@ -40,6 +40,9 @@ The following should be part of the output:
 gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
 
 If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote.
+Verifying the gpg signature along with verifying that the sha256 hash matches the text in the SHASUM file means
+you can have absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to
+file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption.
 
 
 
