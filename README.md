@@ -12,7 +12,7 @@ steggin is a steganography tool for bash.
 
 To use steggin, you need the Bourne Again Shell (bash) to run it, the git content tracker to download and update, and GnuPG (optional) to verify your download and encrypt/decrypt files while steggin'.
 
-To open bash in mac, type command+space and spotlight search for "Terminal" (or I prefer "iTerm2" if you have it).
+To open bash in mac, type do a spotlight search (or look in your Applications folder) for "Terminal" (I prefer "iTerm2" if you have it).
 
 For Windows users, I heard Windows 10 was supposed to get bash. It's about time, because bash is decades old. Good luck if your on windows. Seriously, just get a linux iso and make a bootable usb.
 
@@ -56,7 +56,9 @@ The rest of this README will assume your bash commands are executed within the s
 
 You are going to want to verify the file you download is legitimate. To do this, I've included a SHASUM file containing a sha256 hash of the steggin.sh script.
 
-After downloading, with your current working directory the steggin directory, type into bash:
+When using tools for things like hiding files, you want to have absolute confidence in the legitimacy of your tools. Verifying your downloads is a good habit to get into. Comparing sha256 hashes is good, and will help verify that downloads happen without corruption, but using GnuPG is the ultimate confidence in your tools. If the author uses gpg to sign their tools, you can be as absolutely certain as possible that your tools are legitimate.
+
+After downloading, with your current working directory (cwd) being the steggin directory, type into bash:
 
 ```bash
 shasum -a 256 steggin.sh && cat SHASUM
@@ -69,7 +71,7 @@ You should see output similar to this:
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 ```
 
-If both lines of lines of the output DO NOT match EXACTLY, STOP, DELETE your steggin folder and re-download. It's possible that something went wrong with your download.
+If both lines of lines of the output DO NOT match EXACTLY. The STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
 
 If both output lines DO match EXACTLY, then that's good, but it is still not enough to be absolutely certain that your download is legitimate. A good hacker could give you a malicious steggin.sh file and update the SHASUM file to match his malicious file.
 
@@ -127,7 +129,7 @@ To use steggin to hide a secret file of yours, type into bash:
 If all went well, you should see as part of the output:
 
 ```bash
-!!!!! Sucess file SHASUM is hidden in the file ouput !!!!!
+!!!!! Sucess file <SECRET FILE> is hidden in the file <OUTPUT FILE> !!!!!
 ```
 
 Congrats!! You just stegged bro. This command will create a new file with the filename you specified after the -o argument. This new file will contain the contents of your secret file, though the secret file will not be visible when hidden in photo, movie or audio files.
