@@ -54,7 +54,7 @@ The rest of this README will assume your bash commands are executed within the s
 
 ## Verifying Your Download
 
-You are going to want to verify the file you download is legitimate. To do this, I've included a SHASUM file containing a sha256 has of the steggin.sh script.
+You are going to want to verify the file you download is legitimate. To do this, I've included a SHASUM file containing a sha256 hash of the steggin.sh script.
 
 After downloading, with your current working directory the steggin directory, type into bash:
 
@@ -92,7 +92,7 @@ You should see the following as part of the output:
 gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
 ```
 
-If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the sha256 hash matches the text in the SHASUM file means you can have absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
+If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the sha256 hash matches the text in the SHASUM file means you can have near absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
 
 
 ## Getting Started
@@ -118,12 +118,19 @@ Now you can start steggin' bro.
 
 **ATTENTION:** It is highly recommended to personally create a movie, audio or photo file in which to use as the carrier file. If you use a personal, original file, it makes it much harder for an unauthorized person to detect that a hidden message exists.
 
-To use steggin to hide a your secret file, type into bash:
+To use steggin to hide a secret file of yours, type into bash:
 
 ```bash
 ./steggin.sh -c <CARRIER FILE>  -s <SECRET FILE> -o <OUTPUT FILE>
 ```
-You just stegged bro. This command will create a new file with the name you specified after the -o argument. This new file will contain the contents of your secret file, though it will not be visible when hidden in photo, movie or audio files.
+
+If all went well, you should see as part of the output:
+
+```bash
+!!!!! Sucess file SHASUM is hidden in the file ouput !!!!!
+```
+
+Congrats!! You just stegged bro. This command will create a new file with the filename you specified after the -o argument. This new file will contain the contents of your secret file, though the secret file will not be visible when hidden in photo, movie or audio files.
 
 ## Extracting from a Stegged File
 
@@ -161,4 +168,4 @@ Then enter your password for your GPG secret key to decrypt the message.
     The name of a previously stegged file in which to extract out a hidden message.
 
 -o|--output=
-    The name of the file in which to output the stegged file containing the hidden message. Or in the case of extracting a file, the name of the file in which to extract the secret hidden file.
+    The name of the file in which to output the stegged file containing the hidden message. Or in the case of extracting a file, the name of the file in which to extract the hidden, secret file.
