@@ -1,6 +1,6 @@
 #!/bin/bash
 # ----- Just steggin' bro. -----
-# version 0.0.2
+# version 0.1.0
 # system_page - A script to accept two files, concatenate them, or deconcatonate a concatenated file.
 
 if [ "$#" = 0 ]; then
