@@ -123,13 +123,19 @@ Now you can start steggin' bro.
 To use steggin to hide a secret file of yours, type into bash:
 
 ```bash
-./steggin.sh -c <CARRIER FILE>  -s <SECRET FILE> -o <OUTPUT FILE>
+./steggin.sh -c <CARRIER_FILE>  -s <SECRET_FILE> -o <OUTPUT_FILE>
+```
+
+Alternatively, you can type:
+
+```bash
+./steggin.sh --carrier=<CARRIER_FILE> --secret=<SECRET_FILE> --output=<OUTPUT_FILE>
 ```
 
 If all went well, you should see as part of the output:
 
 ```bash
-!!!!! Sucess file <SECRET FILE> is hidden in the file <OUTPUT FILE> !!!!!
+!!!!! Sucess file <SECRET_FILE> is hidden in the file <OUTPUT FILE> !!!!!
 ```
 
 Congrats!! You just stegged bro. This command will create a new file with the filename you specified after the -o argument. This new file will contain the contents of your secret file, though the secret file will not be visible when hidden in photo, movie or audio files.
@@ -139,13 +145,19 @@ Congrats!! You just stegged bro. This command will create a new file with the fi
 To extract a file that has been previously stegged, type into bash:
 
 ```bash
-./steggin.sh -e <STEGGED FILE> -o <OUTPUT FILE>
+./steggin.sh -e <STEGGED_FILE> -o <OUTPUT_FILE>
+```
+
+Alternatively you can type:
+
+```bash
+./steggin.sh --extract=<STEGGED_FILE> --output=<OUTPUT_FILE>
 ```
 
 If all went well, you will see the message:
 
 ```bash
-!!!!! SUCCESS: EXTRACTED FILE <OUTPUT FILE> IS IDENTICAL TO ORIGINALLY STEGGED FILE !!!!!
+!!!!! SUCCESS: EXTRACTED FILE <OUTPUT_FILE> IS IDENTICAL TO ORIGINALLY STEGGED FILE !!!!!
 ```
 
 steggin takes a SHA 256 hash of the secret file before steggin and compares it to the SHA 256 hash of the extracted file. If the extracted file has been tampered with or modified in any way, steggin will warn you that the file is not Byte for Byte identical to the originally stegged file.
@@ -153,7 +165,7 @@ steggin takes a SHA 256 hash of the secret file before steggin and compares it t
 If the file was encrypted with GPG prior to steggin, then you will need to use GPG on your extracted file to decrypt it, type:
 
 ```bash
-gpg <YOUR EXTRACTED FILE>
+gpg <YOUR_EXTRACTED_FILE>
 ```
 
 Then enter your password for your GPG secret key to decrypt the message.
