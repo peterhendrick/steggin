@@ -123,14 +123,14 @@ function extractSecretFile {
 # Main Code
 errorCases
 if [[ -n "$carrier"  &&  -n "$secret" && -n "$output" ]]; then
-		declareInitialVariables
-		preventMultipleSteggin
-		concatenate
-		declareStegginVariables
-		getSha256Hashes
-		concatenateMetaDataText
-		echoSucess
-		cleanup
+	declareInitialVariables
+	preventMultipleSteggin
+	concatenate
+	declareStegginVariables
+	getSha256Hashes
+	concatenateMetaDataText
+	echoSucess
+	cleanup
 fi
 
 # Split a file that hass been previously stegged.
