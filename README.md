@@ -108,8 +108,8 @@ chmod u+x ./steggin.sh
 Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory. With ./steggin/ as your cwd, in bash type:
 
 ```bash
-cp <PATH TO CARRIER FILE> ./
-cp <PATH TO SECRET FILE> ./
+cp <PATH_TO_CARRIER FILE> ./
+cp <PATH_TO_SECRET FILE> ./
 ```
 
 Now you can start steggin' bro.
