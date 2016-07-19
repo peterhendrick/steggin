@@ -135,7 +135,7 @@ Alternatively, you can type:
 If all went well, you should see as part of the output:
 
 ```bash
-!!!!! Sucess file <SECRET_FILE> is hidden in the file <OUTPUT_FILE> !!!!!
+!!!!! Success file <SECRET_FILE> is hidden in the file <OUTPUT_FILE> !!!!!
 ```
 
 Congrats!! You just stegged bro. This command will create a new file with the filename you specified after the -o argument. This new file will contain the contents of your secret file, though the secret file will not be visible when hidden in photo, movie or audio files.
