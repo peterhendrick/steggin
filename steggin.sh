@@ -3,48 +3,84 @@
 # version 0.0.2
 # system_page - A script to accept two files, concatenate them, or deconcatonate a concatenated file.
 
-if [ $# = 0 ]; then
+if [ "$#" = 0 ]; then
 	echo "Error: We can't be steggin' without any files."
 	exit 1
 fi
 
 # Function Definitions
-function declareInitVars {
-	LAST_BYTE="$( wc -c $1 | awk '{print $1}')"
-	START_BYTE=$(($LAST_BYTE + 1))
-	STEG_FILE=justStegginBro-$1
+function exitFunction {
+	echo "Error - Bad Command: Either one of the input files doesn't exist," >&2
+	echo "                     or you left an arugment blank. Cannot find/read argument '$1'" >&2
+	exit 1
 }
 
-function preventMultiSteggin {
-	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
+# while loop to parse arguments
+while [ "$#" -gt 0 ]; do
+	case "$1" in
+		--carrier=*) [[ -s "${1#*=}" ]] && carrier="${1#*=}" || exitFunction $1; shift 1;;
+		--secret=*) [[ -s "${1#*=}" ]] && secret="${1#*=}" || exitFunction $1; shift 1;;
+		--extract=*) [[ -s "${1#*=}" ]] && stegfile="${1#*=}" || exitFunction $1; shift 1;;
+		--output=*) [[ "${1#*=}" ]] && output="${1#*=}" || exitFunction $1; shift 1;;
+		--carrier|--secret|--extract|--output) echo "$1 must be set = to a filename. Ex. $1=yourFile.ext" >&2; exit 1;;
+		-c) [[ -s "$2" ]] && carrier="$2" || exitFunction $1; shift 2;;
+		-s) [[ -s "$2" ]] && secret="$2" || exitFunction $1; shift 2;;
+		-e) [[ -s "$2" ]] && stegfile="$2" || exitFunction $1; shift 2;;
+		-o) [[ "$2" ]] && output="$2" || exitFunction $1; shift 2;;
+	esac
+done
+
+function errorCases {
+	if [[ -n "$carrier" && -n "$stegfile" ]]; then
+		echo "Error - Bad Command: You cannot specify both a -c|--carrier= file and a -e|--extract= file." >&2
+		exit 1
+	fi
+	if [[ -n "$secret" && -n "$stegfile" ]]; then
+		echo "Error - Bad Command: You cannot specify both a -s|--secret= file and a -e|--extract= file." >&2
+		exit 1
+	fi
+	if [[ -s "$output" ]]; then
+		echo "Error - Bad Command: A file already exists with that name. Exiting without steggin'." >&2
+		echo "                     Please rename the existing file, or specify a different -o output file name." >&2
+		exit 1
+	fi
+}
+
+function declareInitialVariables {
+	lastByte="$( wc -c $carrier | awk '{print $1}')"
+	startByte=$(($lastByte + 1))
+}
+
+function preventMultipleSteggin {
+	CHECK="$(tail -c 500 $carrier | grep -a 'SECSHA' | awk '{print $1}')"
 	if [ "$CHECK" = "SECSHA:" ]; then
-		echo "Error: Carrier file has been previously stegged. Exiting without steggin"
+		echo "Error: Carrier file $carrier has been previously stegged. Exiting without steggin'." >&2
 		exit 1
 	fi
 }
 
 function concatenate {
-	echo concatenating $1 and $2
-	cat $1 $2 > $STEG_FILE
+	echo concatenating "$carrier" and "$secret"
+	cat "$carrier" "$secret" > "$output"
 }
 
-function declareStegVars {
-	END_BYTE="$(wc -c $STEG_FILE | awk '{print $1}')"
-	META_BYTE=$(($END_BYTE + 1))
+function declareStegginVariables {
+	endByte="$(wc -c $output | awk '{print $1}')"
+	metaByte=$(($endByte + 1))
 }
 
-function getShaHashes {
-	CAR_SHA="$(shasum -a 256 $1 | awk '{print $1}')"
-	SECRET_SHA="$(shasum -a 256 $2 | awk '{print $1}')"
+function getSha256Hashes {
+	carSha="$(shasum -a 256 $carrier | awk '{print $1}')"
+	secretSha="$(shasum -a 256 $secret | awk '{print $1}')"
 }
 
-function makeMetaDataText {
-	echo "CARSHA: $CAR_SHA" > metaData.txt
-	echo "SECSHA: $SECRET_SHA" >> metaData.txt
-	echo "STARTBYTE: $START_BYTE" >> metaData.txt
-	echo "ENDBYTE: $END_BYTE" >> metaData.txt
-	echo "METABYTE: $META_BYTE" >> metaData.txt
-	cat metaData.txt >> $STEG_FILE
+function concatenateMetaDataText {
+	echo "CARSHA: $carSha" > metaData.txt
+	echo "SECSHA: $secretSha" >> metaData.txt
+	echo "STARTBYTE: $startByte" >> metaData.txt
+	echo "ENDBYTE: $endByte" >> metaData.txt
+	echo "METABYTE: $metaByte" >> metaData.txt
+	cat metaData.txt >> "$output"
 }
 
 function echoSucess {
@@ -52,7 +88,7 @@ function echoSucess {
 	cat metadata.txt
 	echo ""
 	echo ""
-	echo !!!!! Sucess $2 is hidden in the file $STEG_FILE !!!!!
+	echo "!!!!! Sucess file $secret is hidden in the file $output !!!!!"
 }
 
 function cleanup {
@@ -60,46 +96,47 @@ function cleanup {
 }
 
 function readMetaDataText {
-	CHECK="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $1}')"
+	CHECK="$(tail -c 500 $stegfile | grep -a 'SECSHA' | awk '{print $1}')"
 	if [ "$CHECK" != "SECSHA:" ]; then
-		echo "Error: File has not been previously stegged."
+		echo "Error: File $stegfile has not been previously stegged." >&2
 		exit 1
 	fi
-	SECSHA="$(tail -c 500 $1 | grep -a 'SECSHA' | awk '{print $2}')"
-	CARSHA="$(tail -c 500 $1 | grep -a 'CARSHA' | awk '{print $2}')"
-	STARTBYTE="$(tail -c 500 $1 | grep -a 'STARTBYTE' | awk '{print $2}')"
-	ENDBYTE="$(tail -c 500 $1 | grep -a 'ENDBYTE' | awk '{print $2}')"
-	METABYTE="$(tail -c 500 $1 | grep -a 'METABYTE' | awk '{print $2}')"
+	secSha="$(tail -c 500 $stegfile | grep -a 'SECSHA' | awk '{print $2}')"
+	carSha="$(tail -c 500 $stegfile | grep -a 'CARSHA' | awk '{print $2}')"
+	startByte="$(tail -c 500 $stegfile | grep -a 'STARTBYTE' | awk '{print $2}')"
+	endByte="$(tail -c 500 $stegfile | grep -a 'ENDBYTE' | awk '{print $2}')"
+	METABYTE="$(tail -c 500 $stegfile | grep -a 'METABYTE' | awk '{print $2}')"
 }
 
 function extractSecretFile {
-	head -c $ENDBYTE $1 | tail -c +$STARTBYTE > extractedFile
-	EXTRACTEDSHA="$(shasum -a 256 ./extractedFile | awk '{print $1}')"
-	echo ExtractedSha: $EXTRACTEDSHA
-	echo Original Sha: $SECSHA
-	if [ "$EXTRACTEDSHA" = "$SECSHA" ]; then
-		echo "SUCCESS: EXTRACTED FILE IS IDENTICAL TO ORIGINALLY STEGGED FILE. File saved in ./extractedFile"
+	head -c $endByte "$stegfile" | tail -c +"$startByte" > "$output"
+	extractedSha="$(shasum -a 256 "$output" | awk '{print $1}')"
+	echo Original sha256:  "$secSha"
+	echo Extracted sha256: "$extractedSha"
+	if [ "$extractedSha" = "$secSha" ]; then
+		echo "SUCCESS: EXTRACTED FILE $output IS BYTE FOR BYTE IDENTICAL TO THE ORIGINALLY STEGGED FILE."
 	else
-		echo "WARNING: EXTRACTED STEG FILE HAS BEEN TAMPERED WITH SINCE ORIGINALLY STEGGED"
+		echo "WARNING: EXTRACTED FILE $output HAS BEEN MODIFIED SINCE ORIGINALLY STEGGED."
 	fi
 }
 
 # Main Code
-if [ $# = 2 ]; then
-	declareInitVars $1
-	preventMultiSteggin $1
-	concatenate $1 $2
-	declareStegVars
-	getShaHashes $1 $2
-	makeMetaDataText
-	echoSucess
-	cleanup
+errorCases
+if [[ -n "$carrier"  &&  -n "$secret" && -n "$output" ]]; then
+		declareInitialVariables
+		preventMultipleSteggin
+		concatenate
+		declareStegginVariables
+		getSha256Hashes
+		concatenateMetaDataText
+		echoSucess
+		cleanup
 fi
 
 # Split a file that hass been previously stegged.
-if [ $# = 1 ]; then
-	readMetaDataText $1
-	extractSecretFile $1
+if [[ -n "$stegfile" && -n "$output" ]]; then
+	readMetaDataText
+	extractSecretFile
 fi
 
 exit 0
