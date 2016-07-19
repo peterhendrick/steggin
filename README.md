@@ -12,7 +12,7 @@ steggin is a steganography tool for bash.
 
 To use steggin, you need the Bourne Again Shell (bash) to run it, the git content tracker to download and update, and GnuPG (optional) to verify your download and encrypt/decrypt files while steggin'.
 
-To open bash in mac, type do a spotlight search (or look in your Applications folder) for "Terminal" (I prefer "iTerm2" if you have it).
+To open bash in mac, do a spotlight search (or look in your Applications folder) for "Terminal" (I prefer "iTerm2" if you have it).
 
 For Windows users, I heard Windows 10 was supposed to get bash. It's about time, because bash is decades old. Good luck if your on windows. Seriously, just get a linux iso and make a bootable usb.
 
