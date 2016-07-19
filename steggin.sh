@@ -4,7 +4,7 @@
 # system_page - A script to accept two files, concatenate them, or deconcatonate a concatenated file.
 
 if [ "$#" = 0 ]; then
-	echo "Error: We can't be steggin' without any files."
+	echo "Error: We can't be steggin' without any files." >&2
 	exit 1
 fi
 
