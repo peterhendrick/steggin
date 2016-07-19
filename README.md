@@ -71,9 +71,9 @@ You should see output similar to this:
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 ```
 
-If both lines of lines of the output DO NOT match EXACTLY. The STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
+If both lines of lines of the output DO NOT match EXACTLY. Then STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
 
-If both output lines DO match EXACTLY, then that's good, but it is still not enough to be absolutely certain that your download is legitimate. A good hacker could give you a malicious steggin.sh file and update the SHASUM file to match his malicious file.
+If both output lines DO match EXACTLY, then that's good, but it is still not enough to be absolutely certain that your download is legitimate. A good hacker could give you a malicious steggin.sh file and update the SHASUM file to match their malicious file.
 
 To defend against this type of attack, I have used GnuPG to sign the SHASUM file.
 
@@ -91,7 +91,7 @@ gpg --verify SHASUM.sig SHASUM
 You should see the following as part of the output:
 
 ```bash
-gpg: Good signature from "Peter Hendrick <peterjhendrick@gmail.com>"
+gpg: Good signature from "Peter Hendrick <myemail>"
 ```
 
 If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the sha256 hash matches the text in the SHASUM file means you can have near absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
@@ -123,7 +123,7 @@ Now you can start steggin' bro.
 To use steggin to hide a secret file of yours, type into bash:
 
 ```bash
-./steggin.sh -c <CARRIER_FILE>  -s <SECRET_FILE> -o <OUTPUT_FILE>
+./steggin.sh -c <CARRIER_FILE> -s <SECRET_FILE> -o <OUTPUT_FILE>
 ```
 
 Alternatively, you can type:
