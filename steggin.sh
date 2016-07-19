@@ -52,8 +52,8 @@ function declareInitialVariables {
 }
 
 function preventMultipleSteggin {
-	CHECK="$(tail -c 500 $carrier | grep -a 'SECSHA' | awk '{print $1}')"
-	if [ "$CHECK" = "SECSHA:" ]; then
+	validStegFileCheck="$(tail -c 500 $carrier | grep -a 'SECSHA' | awk '{print $1}')"
+	if [ "$validStegFileCheck" = "SECSHA:" ]; then
 		echo "Error: Carrier file $carrier has been previously stegged. Exiting without steggin'." >&2
 		exit 1
 	fi
@@ -88,7 +88,7 @@ function echoSucess {
 	cat metadata.txt
 	echo ""
 	echo ""
-	echo "!!!!! Sucess file $secret is hidden in the file $output !!!!!"
+	echo "!!!!! Success file $secret is hidden in the file $output !!!!!"
 }
 
 function cleanup {
@@ -96,8 +96,8 @@ function cleanup {
 }
 
 function readMetaDataText {
-	CHECK="$(tail -c 500 $stegfile | grep -a 'SECSHA' | awk '{print $1}')"
-	if [ "$CHECK" != "SECSHA:" ]; then
+	validStegFileCheck="$(tail -c 500 $stegfile | grep -a 'SECSHA' | awk '{print $1}')"
+	if [ "$validStegFileCheck" != "SECSHA:" ]; then
 		echo "Error: File $stegfile has not been previously stegged." >&2
 		exit 1
 	fi
