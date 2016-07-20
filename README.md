@@ -61,6 +61,12 @@ git clone https://github.com/peterhendrick/steggin && cd steggin
 ```
 * git - an open source content tracker.
 
+* clone - clone an existing repository
+
+* https://github.com/peterhendrick/steggin - the url to my existing git repository
+
+* && cd steggin - after downloading make steggin the present working directory (pwd)
+
 The rest of this README will assume your bash commands are executed within the steggin directory (folder).
 
 
@@ -70,7 +76,7 @@ You are going to want to verify the file you download is legitimate. To do this,
 
 When using tools for things like hiding files, you want to have absolute confidence in the legitimacy of your tools. Verifying your downloads is a good habit to get into. Comparing sha256 hashes is good, and will help verify that downloads happen without corruption, but using GnuPG is the ultimate confidence in your tools. If the author uses gpg to sign their tools, you can be as absolutely certain as possible that your tools are legitimate.
 
-After downloading, with your current working directory (cwd) being the steggin directory, type into bash:
+After downloading, with your present working directory (cwd) being the steggin directory, type into bash:
 
 ```bash
 shasum -a 256 steggin.sh && cat SHASUM
@@ -128,7 +134,7 @@ Now that you've verified the authenticity of the steggin file, you need to give 
 chmod u+x ./steggin.sh
 ```
 * chmod - this program is native to unix and modifies files. See more by typing "man chmod".
-* u+x - this argument gives the current user permission to execute the file specified in the next argument.
+* u+x - this argument gives the present user permission to execute the file specified in the next argument.
 
 Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory. With ./steggin/ as your cwd, in bash type:
 
