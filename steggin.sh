@@ -10,14 +10,14 @@ fi
 
 # Function Definitions
 function exitFunction {
-	echo "Error - Bad Command: $1 not found. Use -h or --help." >&2
+	echo "Error - Bad Argument: $1 not found. Use -h or --help." >&2
 	exit 1
 }
 
 function helpFunction {
 	echo "Usage: $0 [options...]"; echo
 	echo "   -h| --help                 Show help."; echo
-	echo "   -c| --carrier=             Carrier file to be used to hide a file. Must be used with -e and -o."; echo
+	echo "   -c| --carrier=             Carrier file to be used to hide a file. Must be used with -s and -o."; echo
 	echo "   -s| --secret=              Secret file to be used hidden in the carrier file. Must be used with -c and -o."; echo
 	echo "   -e| --extract=             Stegged file from which to extract a message. Must be used with -o."; echo
 	echo "   -o| --output=              Output file in which to create a stegged file. Must be used with -c and -s."
