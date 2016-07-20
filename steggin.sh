@@ -57,7 +57,7 @@ function errorCases {
 		echo "Error - Bad Command: Specifying -e|--extract= requires an -o|--output= file. Use -h or --help." >&2
 		exit 1
 	fi
-	if [[ -n "$output" && -z "$carrer" && -z "$stegfile" ]]; then
+	if [[ -n "$output" && -z "$carrier" && -z "$stegfile" ]]; then
 		echo "Error - Bad Command: Specifying -o|--output= requires either -c|--carrier= and a -s|--secret= files or an -e|--extract= file. Use -h or --help" >&2
 		exit 1
 	fi
@@ -141,8 +141,8 @@ function readMetaDataText {
 function extractSecretFile {
 	head -c $endByte "$stegfile" | tail -c +"$startByte" > "$output"
 	extractedSha="$(shasum -a 256 "$output" | awk '{print $1}')"
-	echo Original sha256:  "$secSha"
-	echo Extracted sha256: "$extractedSha"
+	echo "Original sha256:  $secSha"
+	echo "Extracted sha256: $extractedSha"
 	if [ "$extractedSha" = "$secSha" ]; then
 		echo "SUCCESS: EXTRACTED FILE $output IS BYTE FOR BYTE IDENTICAL TO THE ORIGINALLY STEGGED FILE."
 	else
