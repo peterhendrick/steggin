@@ -4,7 +4,7 @@
 # system_page - A script to accept two files, concatenate them, or deconcatonate a concatenated file.
 
 if [ "$#" = 0 ]; then
-	echo "Error: We can't be steggin' without any files." >&2
+	echo "Error: We can't be steggin' without any files. Use -h or --help." >&2
 	exit 1
 fi
 
@@ -15,22 +15,15 @@ function exitFunction {
 }
 
 function helpFunction {
-	echo "Usage: $0 [options...]"
-    echo
-    echo "   -h| --help                 Show help."
-	echo
-    echo "   -c| --carrier=             Carrier file to be used to hide a file. Must be used with -e and -o."
-	echo
-	echo "   -s| --secret=              Secret file to be used hidden in the carrier file. Must be used with -c and -o."
-	echo
-	echo "   -e| --extract=             Stegged file from which to extract a message. Must be used with -o."
-	echo
+	echo "Usage: $0 [options...]"; echo
+	echo "   -h| --help                 Show help."; echo
+	echo "   -c| --carrier=             Carrier file to be used to hide a file. Must be used with -e and -o."; echo
+	echo "   -s| --secret=              Secret file to be used hidden in the carrier file. Must be used with -c and -o."; echo
+	echo "   -e| --extract=             Stegged file from which to extract a message. Must be used with -o."; echo
 	echo "   -o| --output=              Output file in which to create a stegged file. Must be used with -c and -s."
 	echo "                              or"
-	echo "                              Output file in which extract a hidden file. Must be used with -e."
-    echo
-
-    exit 1
+	echo "                              Output file in which extract a hidden file. Must be used with -e."; echo
+	exit 1
 }
 
 # while loop to parse arguments
@@ -115,9 +108,7 @@ function concatenateMetaDataText {
 
 function echoSucess {
 	echo Meta File:
-	cat metadata.txt
-	echo ""
-	echo ""
+	cat metadata.txt && echo; echo
 	echo "!!!!! Success file $secret is hidden in the file $output !!!!!"
 }
 
