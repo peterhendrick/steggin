@@ -27,7 +27,7 @@ To see if you have git installed, type into bash:
 ```bash
 which git
 ```
-"which" is a native unix command that searches your $PATH for the argument "git".
+* which - is a native unix command that searches your $PATH for the argument "git".
 
 You have git installed if you get output like this:
 
@@ -59,7 +59,7 @@ Once you have git. Type into bash:
 ```bash
 git clone https://github.com/peterhendrick/steggin && cd steggin
 ```
-git - an open source content tracker.
+* git - an open source content tracker.
 
 The rest of this README will assume your bash commands are executed within the steggin directory (folder).
 
