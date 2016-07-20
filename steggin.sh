@@ -126,7 +126,7 @@ function readMetaDataText {
 	carSha="$(tail -c 500 $stegfile | grep -a 'CARSHA' | awk '{print $2}')"
 	startByte="$(tail -c 500 $stegfile | grep -a 'STARTBYTE' | awk '{print $2}')"
 	endByte="$(tail -c 500 $stegfile | grep -a 'ENDBYTE' | awk '{print $2}')"
-	METABYTE="$(tail -c 500 $stegfile | grep -a 'METABYTE' | awk '{print $2}')"
+	metaByte="$(tail -c 500 $stegfile | grep -a 'METABYTE' | awk '{print $2}')"
 }
 
 function extractSecretFile {
