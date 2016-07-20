@@ -105,9 +105,9 @@ You are going to want to verify the SHASUM.sig file is a valid gpg signature for
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
 ```
-* gpg - this is the open source program to use.
-* --keyserver - this is the argument for the remote keyserver in which to receive my published public key.
-* --recv-key - import the key that matches the next characters.
+* gpg - an open source encryption program.
+* --keyserver - this argument specifies the remote keyserver in which to receive my public key.
+* --recv-key - import the key that matches the next argument.
 
 
 You now have my public key imported on your machine. You can now verify the SHASUM.sig file. In bash type:
@@ -142,7 +142,7 @@ Currently, you must use files in the steggin directory. So copy your carrier and
 cp <PATH_TO_CARRIER FILE> ./
 cp <PATH_TO_SECRET FILE> ./
 ```
-* cp - the copy command is native to unix. It is used to copy the contents of the first arg to the path of the second arg.
+* cp - the copy command is native to unix. It is used to copy the contents of the first argument to the path of the second argument.
 
 Now you can start steggin' bro.
 
