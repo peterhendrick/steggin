@@ -22,7 +22,7 @@ function helpFunction {
 	echo "   -e| --extract=             Stegged file from which to extract a message. Must be used with -o."; echo
 	echo "   -o| --output=              Output file in which to create a stegged file. Must be used with -c and -s."
 	echo "                              or"
-	echo "                              Output file in which extract a hidden file. Must be used with -e."; echo
+	echo "                              Output file in which to extract a hidden file. Must be used with -e."; echo
 	exit 1
 }
 
