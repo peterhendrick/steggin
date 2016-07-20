@@ -15,7 +15,7 @@ function exitFunction {
 }
 
 function helpFunction {
-	echo "Usage: $0 [options...]"; echo
+	echo "Usage: $0 [arguments...]"; echo
 	echo "   -h| --help                 Show help."; echo
 	echo "   -c| --carrier=             Carrier file to be used to hide a file. Must be used with -s and -o."; echo
 	echo "   -s| --secret=              Secret file to be hidden in the carrier file. Must be used with -c and -o."; echo
