@@ -76,7 +76,7 @@ You are going to want to verify the file you download is legitimate. To do this,
 
 When using tools for things like hiding files, you want to have absolute confidence in the legitimacy of your tools. Verifying your downloads is a good habit to get into. Comparing sha256 hashes is good, and will help verify that downloads happen without corruption, but using GnuPG is the ultimate confidence in your tools. If the author uses gpg to sign their tools, you can be as absolutely certain as possible that your tools are legitimate.
 
-After downloading, with your present working directory (cwd) being the steggin directory, type into bash:
+After downloading, while your present working directory (pwd) is steggin/, type into bash:
 
 ```bash
 shasum -a 256 steggin.sh && cat SHASUM
@@ -86,12 +86,12 @@ You should see output similar to this:
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 ```
-* shasum - a program to calculate a hash of the file.
-* -a - to specify the algorithm to calculate the hash of the input file (steggin.sh).
-* && - to do two commands at once.
-* cat - a program to concatenate output from a file (SHASUM).
+* shasum - a program to calculate a hash of a file.
+* -a - to specify the algorithm (256) to calculate the hash of the input file (steggin.sh).
+* && - to do two commands at once if the first command succeeds.
+* cat - a program to concatenate output from a given file (SHASUM).
 
-The hexadecimal string on the first line represents a unique identity of the downloaded steggin.sh file.
+The hexadecimal string on the first line of the output represents a unique identity of the downloaded steggin.sh file.
 The second line is text of the sha256 I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
 
 If both lines of the output DO NOT match EXACTLY. Then STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
@@ -115,7 +115,7 @@ You now have my public key imported on your machine. You can now verify the SHAS
 ```bash
 gpg --verify SHASUM.sig SHASUM
 ```
-* --verify this argument verifies the next argument is a valid signed signature of the file that comes after.
+* --verify this argument verifies my gpg signature file against the SHASUM file specified in the last argument.
 
 You should see the following as part of the output:
 
@@ -133,10 +133,11 @@ Now that you've verified the authenticity of the steggin file, you need to give 
 ```bash
 chmod u+x ./steggin.sh
 ```
-* chmod - this program is native to unix and modifies files. See more by typing "man chmod".
-* u+x - this argument gives the present user permission to execute the file specified in the next argument.
+* chmod - this program is native to unix and modifies file permissions. See more by typing "man chmod".
+* u+x - this argument gives the present user permission to execute the file specified in the next argument (./steggin.sh).
 
-Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory. With ./steggin/ as your cwd, in bash type:
+
+Currently, when using steggin, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory. With ./steggin/ as your pwd, in bash type:
 
 ```bash
 cp <PATH_TO_CARRIER FILE> ./
