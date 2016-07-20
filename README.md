@@ -27,11 +27,15 @@ To see if you have git installed, type into bash:
 ```bash
 which git
 ```
-If there is a response that looks similar to this, then you have git installed already:
+"which" is a native unix command that searches your $PATH for the argument "git".
+
+You have git installed if you get output like this:
 
 ```bash
 /usr/local/bin/git
 ```
+
+If your output is empty, you do not have git installed.
 
 If you don't have git, you can install it here: https://git-scm.com/downloads
 
@@ -46,6 +50,7 @@ If you see output similar to this, then you have gpg installed already:
 ```bash
 /usr/local/bin/gpg
 ```
+If your output is empty, you do not have gpg installed.
 
 If you don't have gpg installed, you can download it here: https://www.gnupg.org/download/index.html
 
@@ -54,6 +59,7 @@ Once you have git. Type into bash:
 ```bash
 git clone https://github.com/peterhendrick/steggin && cd steggin
 ```
+git - an open source content tracker.
 
 The rest of this README will assume your bash commands are executed within the steggin directory (folder).
 
@@ -69,13 +75,18 @@ After downloading, with your current working directory (cwd) being the steggin d
 ```bash
 shasum -a 256 steggin.sh && cat SHASUM
 ```
-
 You should see output similar to this:
-
 ```bash
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 442298e67603b80d4db2e42ba98bb8bd9feb3c652840704e98163949cbbf6f01  steggin.sh
 ```
+* shasum - a program to calculate a hash of the file.
+* -a - to specify the algorithm to calculate the hash of the input file (steggin.sh).
+* && - to do two commands at once.
+* cat - a program to concatenate output from a file (SHASUM).
+
+The hexadecimal string on the first line represents a unique identity of the downloaded steggin.sh file.
+The second line is text of the sha256 I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
 
 If both lines of the output DO NOT match EXACTLY. Then STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
 
@@ -88,12 +99,18 @@ You are going to want to verify the SHASUM.sig file is a valid gpg signature for
 ```bash
 gpg --keyserver hkp://keys.gnupg.net --recv-key EC3ED53D
 ```
+* gpg - this is the open source program to use.
+* --keyserver - this is the argument for the remote keyserver in which to receive my published public key.
+* --recv-key - import the key that matches the next characters.
+
 
 You now have my public key imported on your machine. You can now verify the SHASUM.sig file. In bash type:
 
 ```bash
 gpg --verify SHASUM.sig SHASUM
 ```
+* --verify this argument verifies the next argument is a valid signed signature of the file that comes after.
+
 You should see the following as part of the output:
 
 ```bash
@@ -110,6 +127,8 @@ Now that you've verified the authenticity of the steggin file, you need to give 
 ```bash
 chmod u+x ./steggin.sh
 ```
+* chmod - this program is native to unix and modifies files. See more by typing "man chmod".
+* u+x - this argument gives the current user permission to execute the file specified in the next argument.
 
 Currently, you must use files in the steggin directory. So copy your carrier and secret files to the steggin directory. With ./steggin/ as your cwd, in bash type:
 
@@ -117,6 +136,7 @@ Currently, you must use files in the steggin directory. So copy your carrier and
 cp <PATH_TO_CARRIER FILE> ./
 cp <PATH_TO_SECRET FILE> ./
 ```
+* cp - the copy command is native to unix. It is used to copy the contents of the first arg to the path of the second arg.
 
 Now you can start steggin' bro.
 
@@ -125,6 +145,8 @@ Now you can start steggin' bro.
 **ATTENTION:** It is highly recommended for your secret file to be encrypted with GnuPG prior to steggin'. Encrypting with GPG will ensure that even if your hidden file is discovered, it cannot be read by unauthorized people.
 
 **ATTENTION:** It is highly recommended to personally create a movie, audio or photo file in which to use as the carrier file. If you use a personal, original file, it makes it much harder for an unauthorized person to detect that a hidden message exists.
+
+To see the help contents, use the -h or the --help argument.
 
 To use steggin to hide a secret file of yours, type into bash:
 
