@@ -123,7 +123,7 @@ You should see the following as part of the output:
 gpg: Good signature from "Peter Hendrick <myemail>"
 ```
 
-If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the sha256 hash matches the text in the SHASUM file means you can have near absolute certainty that the steggin file downloaded on your computer is Byte for Byte identical to the file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
+If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the "shasum -a 256 steggin.sh" hash matches the text in the SHASUM file means you can have near absolute certainty that the steggin.sh file downloaded on your computer is Byte for Byte identical to the steggin.sh file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
 
 
 ## Getting Started
