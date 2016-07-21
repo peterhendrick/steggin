@@ -92,7 +92,7 @@ You should see output similar to this:
 * cat - a program to concatenate output from a given file (SHASUM).
 
 The hexadecimal string on the first line of the output represents a unique identity of the downloaded steggin.sh file.
-The second line is text of the sha256 I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
+The second line is text of the sha256 that I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
 
 If both lines of the output DO NOT match EXACTLY. Then STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
 
