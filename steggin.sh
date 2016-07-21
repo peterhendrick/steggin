@@ -130,7 +130,7 @@ function readMetaDataText {
 }
 
 function extractSecretFile {
-	head -c $endByte "$stegfile" | tail -c +"$startByte" > "$output"
+	head -c "$endByte" "$stegfile" | tail -c +"$startByte" > "$output"
 	extractedSha="$(shasum -a 256 "$output" | awk '{print $1}')"
 	echo "Original sha256:  $secSha"
 	echo "Extracted sha256: $extractedSha"
