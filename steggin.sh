@@ -62,7 +62,7 @@ function errorCases {
 		echo "Error - Bad Command: You cannot specify both a -s|--secret= file and an -e|--extract= file. Use -h or --help." >&2
 		exit 1
 	fi
-	if [[ -s "$output" ]]; then
+	if [[ -e "$output" ]]; then
 		echo "Error - Bad Command: A file already exists with that name. Exiting without steggin'." >&2
 		echo "                     Please rename the existing file, or specify a different -o output file name. Use -h or --help." >&2
 		exit 1
@@ -142,7 +142,11 @@ function extractSecretFile {
 }
 
 # Main Code
+
+# Don't run the code if these error cases are met.
 errorCases
+
+# Create stegfile if a carrier, secret and output file were given.
 if [[ -n "$carrier"  &&  -n "$secret" && -n "$output" ]]; then
 	declareInitialVariables
 	preventMultipleSteggin
