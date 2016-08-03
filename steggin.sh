@@ -124,7 +124,7 @@ function declareStegginVariables {
 
 function getSha256Hashes {
 	carSha="$(shasum -a 256 $carrier | awk '{print $1}')"
-	if [[ $secretSha ]]; then
+	if [[ $secretEncryptedSha ]]; then
 		encryptedSha="$(shasum -a 256 $secret | awk '{print $1}')"
 	else
 		secretSha="$(shasum -a 256 $secret | awk '{print $1}')"
@@ -134,8 +134,8 @@ function getSha256Hashes {
 function concatenateMetaDataText {
 	echo "CARSHA:       $carSha" > metaData.txt
 	echo "SECSHA:       $secretSha" >> metaData.txt
-	if [[ $encryptedSha ]]; then
-		echo "ENCRYPTEDSHA: $encryptedSha" >> metadata.txt
+	if [[ $secretEncryptedSha ]]; then
+		echo "ENCRYPTEDSHA: $secretEncryptedSha" >> metadata.txt
 	fi
 	echo "STARTBYTE:    $startByte" >> metaData.txt
 	echo "ENDBYTE:      $endByte" >> metaData.txt
