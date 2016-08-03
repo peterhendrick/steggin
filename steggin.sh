@@ -35,6 +35,7 @@ while [ "$#" -gt 0 ]; do
 		--secret=*) [[ -s "${1#*=}" ]] && secret="${1#*=}" || exitFunction "$1"; shift 1;;
 		--extract=*) [[ -s "${1#*=}" ]] && stegfile="${1#*=}" || exitFunction "$1"; shift 1;;
 		--output=*) [[ "${1#*=}" ]] && output="${1#*=}" || exitFunction "$1"; shift 1;;
+		--no-password) noPassword=true; shift 1;;
 		--carrier|--secret|--extract|--output) echo "$1 must be set = to a filename. Ex. $1=yourFile.ext. Use -h or --help" >&2; exit 1;;
 		-c) [[ -s "$2" ]] && carrier="$2" || exitFunction "$1 $2"; shift 2;;
 		-s) [[ -s "$2" ]] && secret="$2" || exitFunction "$1 $2"; shift 2;;
@@ -82,6 +83,35 @@ function preventMultipleSteggin {
 	fi
 }
 
+function encryptSecretFile {
+	secretSha="$(shasum -a 256 $secret)"
+	echo "Please enter a password for this encryption, do not use spaces: " && read -s key
+	# read -s key
+	password="$(echo $key | shasum -a 256 -b | awk '{print $1}')"
+	unset key
+	echo "Enter password again for confirmation: " && read -s keyConfirm
+	# read -s keyConfirm
+	passwordConfirm="$(echo $keyConfirm | shasum -a 256 -b | awk '{print $1}')"
+	unset keyConfirm
+
+	if [[ "$password" = "$passwordConfirm" ]]; then
+		openssl enc -base64 -e -aes-256-cbc -in $secret -out .secretEncrypted.enc -k $password
+		# I should be able to not specify a -out and it will print to the standard output.
+		# openssl aes-256-cbc -in $secret -out .secretEncrypted.enc -k $password
+
+		cat .secretEncrypted.enc
+		# openssl enc -base64 -d -aes-256-cbc -d -in $secret -out ./.secretDecrtypted.dec -k $password
+		secretEncryptedSha="$(cat .secretEncrypted.enc | shasum -a 256 | awk '{print $1}')"
+		# secretEncryptedSha="$(shasum -a 256 $secret)"
+		echo $secretEncryptedSha
+		# rm .secretEncrypted.enc
+		# It is working to this point. However, after trying to decrypt, I get "bad magic number" or "error reading input file".
+	else
+		echo "Error: Passwords did not match, exiting without steggin'."
+		exit 1
+	fi
+}
+
 function concatenate {
 	echo concatenating "$carrier" and "$secret"
 	cat "$carrier" "$secret" > "$output"
@@ -94,17 +124,25 @@ function declareStegginVariables {
 
 function getSha256Hashes {
 	carSha="$(shasum -a 256 $carrier | awk '{print $1}')"
-	secretSha="$(shasum -a 256 $secret | awk '{print $1}')"
+	if [[ $secretSha ]]; then
+		encryptedSha="$(shasum -a 256 $secret | awk '{print $1}')"
+	else
+		secretSha="$(shasum -a 256 $secret | awk '{print $1}')"
+	fi
 }
 
 function concatenateMetaDataText {
-	echo "CARSHA: $carSha" > metaData.txt
-	echo "SECSHA: $secretSha" >> metaData.txt
-	echo "STARTBYTE: $startByte" >> metaData.txt
-	echo "ENDBYTE: $endByte" >> metaData.txt
-	echo "METABYTE: $metaByte" >> metaData.txt
+	echo "CARSHA:       $carSha" > metaData.txt
+	echo "SECSHA:       $secretSha" >> metaData.txt
+	if [[ $encryptedSha ]]; then
+		echo "ENCRYPTEDSHA: $encryptedSha" >> metadata.txt
+	fi
+	echo "STARTBYTE:    $startByte" >> metaData.txt
+	echo "ENDBYTE:      $endByte" >> metaData.txt
+	echo "METABYTE:     $metaByte" >> metaData.txt
 	cat metaData.txt >> "$output"
 }
+
 
 function echoSucess {
 	echo Meta File:
@@ -150,6 +188,9 @@ errorCases
 if [[ -n "$carrier"  &&  -n "$secret" && -n "$output" ]]; then
 	declareInitialVariables
 	preventMultipleSteggin
+	if [[ $noPassword != true ]]; then
+		encryptSecretFile
+	fi
 	concatenate
 	declareStegginVariables
 	getSha256Hashes
