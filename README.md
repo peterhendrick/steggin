@@ -129,6 +129,21 @@ gpg: Good signature from "Peter Hendrick <myemail>"
 
 If you see the "Good signature", you can be as certain as possible that the SHASUM file is the file I wrote. Verifying the gpg signature along with verifying that the "shasum -a 256 steggin.sh" hash matches the text in the SHASUM file means you can have near absolute certainty that the steggin.sh file downloaded on your computer is Byte for Byte identical to the steggin.sh file I wrote. GPG is military grade encryption, so there are no known hacks to break the encryption. The only way for someone to fake my signature is for them to digitally capture my gpg secret key and also know my passphrase for the secret key.
 
+If you have my gpg public key, and you would like to use one command for the verification, you can type:
+
+```bash
+cat SHASUM && shasum -a 256 steggin.sh && gpg --verify SHASUM.sig SHASUM
+```
+
+You should see output similar to this:
+
+```bash
+31ba208c3034761b19a71656f8df57a4d038462aaaf6d633daf8153fe1c05ce1  steggin.sh
+31ba208c3034761b19a71656f8df57a4d038462aaaf6d633daf8153fe1c05ce1  steggin.sh
+gpg: Signature made Mon Aug 29 22:46:21 2016 UTC using RSA key ID EC3ED53D
+gpg: Good signature from "Peter Hendrick <myemail>"
+```
+
 
 ## Getting Started
 
