@@ -14,6 +14,8 @@ To use steggin, you need:
 
 * The Bourne Again Shell - bash: to execute the script. This should come pre-installed in mac and linux.
 
+* Xcode (for mac users) - mac developer tools. You'll need Xcode to use git source control.
+
 * git - the stupid content tracker: You'll need git to download and update your steggin file.
 
 * GnuPG - Gnu Privacy Guard (optional): to verify your download and encrypt/decrypt files while steggin'.
@@ -36,6 +38,8 @@ You have git installed if you get output like this:
 ```
 
 If your output is empty, you do not have git installed.
+
+If you need Xcode, you can install it here (it's about 3GB of data): https://developer.apple.com/xcode/
 
 If you don't have git, you can install it here: https://git-scm.com/downloads
 
@@ -92,7 +96,7 @@ You should see output similar to this:
 * cat - a program to concatenate output from a given file (SHASUM).
 
 The hexadecimal string on the first line of the output represents a unique identity of the downloaded steggin.sh file.
-The second line is text of the sha256 I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
+The second line is text of the sha256 that I calculated on my personal machine. If they match, you likely have an identical file to the one I wrote.
 
 If both lines of the output DO NOT match EXACTLY. Then STOP and reflect on what you've done so far. DELETE your steggin folder and re-download. It's possible that something went wrong while downloading.
 
