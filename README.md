@@ -1,7 +1,6 @@
-===============================================================================================
 
 
-Just steggin' bro!
+steggin'!
 =======
 
 steggin is a steganography tool for bash.
